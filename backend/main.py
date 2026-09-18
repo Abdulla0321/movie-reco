@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from app.api.endpoints import recommend
 
 app = FastAPI(title="MovieMind API")
 
@@ -11,7 +12,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(recommend.router)
+
 @app.get("/")
 def root():
     return {"message": "MovieMind Backend API is running!"}
-
